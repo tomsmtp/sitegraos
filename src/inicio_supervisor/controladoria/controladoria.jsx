@@ -5,7 +5,7 @@ const AUTO_REFRESH_MS = 15000;
 const MAX_INPUT_LENGTH = 100;
 
 export default function Controladoria({ currentUser }) {
-    const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+    const API_BASE_URL = import.meta.env.VITE_API_URL || "https://variables-etc-basketball-catalyst.trycloudflare.com";
     const tipoHeader = String(currentUser?.TIPO || currentUser?.tipo || "").trim().toUpperCase();
     const hasValue = (value) => value !== null && value !== undefined && String(value).trim() !== "";
 

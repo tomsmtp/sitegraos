@@ -21,7 +21,7 @@ const estadoInicialForm = {
 };
 
 export default function LogisticaPage({ currentUser }) {
-    const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+    const API_BASE_URL = import.meta.env.VITE_API_URL || "https://variables-etc-basketball-catalyst.trycloudflare.com";
     const tipoHeader = String(currentUser?.TIPO || currentUser?.tipo || "").trim().toUpperCase();
 
     const cpfRef = useRef();
