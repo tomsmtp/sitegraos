@@ -1,0 +1,42 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  NODE_VERSION: "18"
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  image: node:18
+  script:
+    - npm ci
+    - npm run build
+    - echo "Build concluído!"
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  only:
+    - main
+    - master
+
+deploy:cloudflare:
+  stage: deploy
+  image: node:18
+  script:
+    - npm install -g wrangler
+    - npm ci
+    - npm run build
+    - echo "Projeto pronto para publicar no Cloudflare Pages"
+    - echo "Verifique as instruções no README.md para conectar ao Cloudflare"
+  artifacts:
+    paths:
+      - dist/
+  only:
+    - main
+    - master
+  when: manual
