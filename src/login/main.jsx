@@ -137,8 +137,12 @@ export default function Login() {
             <Inicio onExit={() => {
                 localStorage.removeItem('loggedIn');
                 localStorage.removeItem('currentUser');
+                localStorage.removeItem('LoginData'); // Remove credenciais salvas ao deslogar
                 setCurrentUser(null);
                 setLoggedIn(false);
+                setEmail(''); // Limpa os campos
+                setSenha('');
+                setRememberMe(false);
             }} currentUser={currentUser} />
         ) : (
 
