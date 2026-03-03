@@ -392,6 +392,7 @@ export default function Carregamento({ currentUser }) {
                     ref={talhoesVirgula}
                     maxLength={MAX_INPUT_LENGTH}
                     value={formData.talhoes}
+                    placeholder="Ex: 1AO20, 1AO21"
                     onChange={e => setFormData({ ...formData, talhoes: limitarTalhoes(e.target.value) })}
                     onKeyDown={e => {if (e.key === "Enter") {pesoEstimado.current.focus();}}}
                     ></input>

@@ -95,31 +95,7 @@ export default function LogisticaPage({ currentUser }) {
         return digitos.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
-    const formatFrete = (value) => {
-        // Remove tudo exceto dígitos e virgula/ponto
-        let cleaned = value.replace(/[^0-9.,]/g, '');
-        
-        // Substitui ponto por virgula (padrão PT-BR)
-        cleaned = cleaned.replace(/\./g, ',');
-        
-        // Se tiver mais de uma virgula, remove as extras mantendo só a última
-        const parts = cleaned.split(',');
-        if (parts.length > 2) {
-            cleaned = parts[0].replace(/,/g, '') + ',' + parts[parts.length - 1];
-        }
-        
-        // Separa inteiro e decimal
-        const [inteiro = '', decimal = ''] = cleaned.split(',');
-        
-        // Formata com separador de milhar (ponto) e decimal (virgula)
-        const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        
-        if (decimal) {
-            return inteiroFormatado + ',' + decimal.slice(0, 2);
-        }
-        
-        return inteiroFormatado;
-    };
+
 
     useEffect(() => {
         const carregarDisponibilidades = async () => {
@@ -482,7 +458,7 @@ export default function LogisticaPage({ currentUser }) {
                 ref={freteRef}
                 value={formData.frete}
                 placeholder="R$ 0,00"
-                onChange={(e) => setFormData({ ...formData, frete: formatFrete(e.target.value) })}
+                onChange={(e) => setFormData({ ...formData, frete: e.target.value })}
                 onKeyDown={e => {if (e.key === "Enter") btnRef.current.click();}}
                 />
             </label>
@@ -652,7 +628,7 @@ export default function LogisticaPage({ currentUser }) {
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
                             value={formEdicao.frete}
-                            onChange={e => setFormEdicao({...formEdicao, frete: formatFrete(e.target.value)})}
+                            onChange={e => setFormEdicao({...formEdicao, frete: e.target.value})}
                         />
                     </label>
 
