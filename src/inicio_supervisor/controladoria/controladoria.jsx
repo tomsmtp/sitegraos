@@ -7,6 +7,7 @@ const MAX_INPUT_LENGTH = 100;
 export default function Controladoria({ currentUser }) {
     const API_BASE_URL = import.meta.env.VITE_API_URL || "https://variables-etc-basketball-catalyst.trycloudflare.com";
     const tipoHeader = String(currentUser?.TIPO || currentUser?.tipo || "").trim().toUpperCase();
+    const canEdit = tipoHeader !== 'SUPERVISOR'; // SUPERVISOR can only view
     const hasValue = (value) => value !== null && value !== undefined && String(value).trim() !== "";
 
     const formatKg = (value) => {
@@ -598,6 +599,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.unidade}
                             placeholder="Ex: 112"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, unidade: formatTextoMaiusculo(e.target.value, 40) }))}
@@ -609,6 +611,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.zona}
                             placeholder="Ex: 123"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, zona: formatTextoMaiusculo(e.target.value, 40) }))}
@@ -620,6 +623,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.fazenda}
                             placeholder="Ex: FAZENDA MODELO"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, fazenda: formatTextoMaiusculo(e.target.value, 80) }))}
@@ -631,6 +635,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.empresa}
                             placeholder="Ex: AGT TRANSPORTES"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, empresa: formatTextoMaiusculo(e.target.value, 80) }))}
@@ -642,6 +647,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.motorista}
                             placeholder="Ex: JOÃO SILVA"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, motorista: formatNome(e.target.value) }))}
@@ -653,6 +659,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.placa}
                             placeholder="Ex: ABC1234"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, placa: formatPlaca(e.target.value) }))}
@@ -664,6 +671,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.pesoEstimado}
                             placeholder="Ex: 3,000 KG"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, pesoEstimado: formatKg(e.target.value) }))}
@@ -686,6 +694,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.pesoBruto}
                             placeholder="Ex: 3,200 KG"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, pesoBruto: formatKg(e.target.value) }))}
@@ -697,6 +706,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.tara}
                             placeholder="Ex: 350 KG"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, tara: formatKg(e.target.value) }))}
@@ -718,6 +728,7 @@ export default function Controladoria({ currentUser }) {
                         <input
                             type="text"
                             maxLength={MAX_INPUT_LENGTH}
+                            disabled={!canEdit}
                             value={edicao.refugo}
                             placeholder="Ex: 50 KG"
                             onChange={(e) => setEdicao((prev) => ({ ...prev, refugo: formatKg(e.target.value) }))}
@@ -727,6 +738,7 @@ export default function Controladoria({ currentUser }) {
                     <label>
                         O item possui divergência?
                         <select
+                            disabled={!canEdit}
                             value={edicao.temDivergencia ? "SIM" : "NAO"}
                             onChange={(e) => {
                                 const possui = e.target.value === "SIM";
@@ -757,6 +769,7 @@ export default function Controladoria({ currentUser }) {
                     <label>
                         Status
                         <select
+                            disabled={!canEdit}
                             value={edicao.status}
                             onChange={(e) => setEdicao((prev) => ({ ...prev, status: e.target.value }))}
                         >
@@ -769,21 +782,28 @@ export default function Controladoria({ currentUser }) {
                     </label>
 
                     <div className="drawer-actions">
-                        <button type="button" onClick={salvarEdicao}>Salvar edição</button>
-                        <button type="button" onClick={marcarDivergencia}>Marcar divergência</button>
-                        <button
-                            type="button"
-                            className={registroJaFinalizado ? "btn-finalizado" : ""}
-                            onClick={finalizarRegistro}
-                            disabled={registroJaFinalizado}
-                            title={registroJaFinalizado
-                                ? "Processo já finalizado"
-                                : camposPendentesFinalizacao.length > 0
-                                    ? `Preencha antes de finalizar: ${camposPendentesFinalizacao.join(", ")}`
-                                    : "Finalizar processo"}
-                        >
-                            {registroJaFinalizado ? "Finalizado" : "Finalizar"}
-                        </button>
+                        {canEdit && (
+                            <>
+                                <button type="button" onClick={salvarEdicao}>Salvar edição</button>
+                                <button type="button" onClick={marcarDivergencia}>Marcar divergência</button>
+                                <button
+                                    type="button"
+                                    className={registroJaFinalizado ? "btn-finalizado" : ""}
+                                    onClick={finalizarRegistro}
+                                    disabled={registroJaFinalizado}
+                                    title={registroJaFinalizado
+                                        ? "Processo já finalizado"
+                                        : camposPendentesFinalizacao.length > 0
+                                            ? `Preencha antes de finalizar: ${camposPendentesFinalizacao.join(", ")}`
+                                            : "Finalizar processo"}
+                                >
+                                    {registroJaFinalizado ? "Finalizado" : "Finalizar"}
+                                </button>
+                            </>
+                        )}
+                        {!canEdit && (
+                            <p className="read-only-msg">Modo visualização apenas. Apenas usuários do tipo CONTROLADORIA podem editar.</p>
+                        )}
                     </div>
                 </aside>
                 </div>

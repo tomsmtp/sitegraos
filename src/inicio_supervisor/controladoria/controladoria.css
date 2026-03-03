@@ -320,4 +320,28 @@
     box-shadow: none;
 }
 
+/* Read-only styles for SUPERVISOR access */
+.controladoria-drawer input:disabled,
+.controladoria-drawer select:disabled {
+    background-color: #f5f5f5;
+    color: #666;
+    cursor: not-allowed;
+    border-color: #ddd;
+}
+
+.controladoria-drawer input:disabled::placeholder {
+    color: #999;
+}
+
+.read-only-msg {
+    padding: 0.75rem;
+    background-color: #cfe2ff;
+    color: #084298;
+    border: 1px solid #b6d4fe;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: center;
+}
+
 

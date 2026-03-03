@@ -32,7 +32,7 @@ export default function Inicio({ onExit, currentUser }) {
             return ['APONTAMENTO', 'LOGISTICA', 'CARREGAMENTO', 'CONTROLADORIA'];
         }
         if (tipoAcesso === 'SUPERVISOR') {
-            return ['PROCESSO_UNICO', 'APONTAMENTO', 'LOGISTICA'];
+            return ['PROCESSO_UNICO', 'APONTAMENTO', 'LOGISTICA', 'CONTROLADORIA'];
         }
         if (tipoAcesso === 'LOGISTICA') {
             return ['LOGISTICA'];
