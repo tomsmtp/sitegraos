@@ -9,7 +9,7 @@ export default function Inicio({ onExit, currentUser }) {
 
     const MAX_INPUT_LENGTH = 100;
 
-    const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://population-copy-government-decade.trycloudflare.com';
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://variables-etc-basketball-catalyst.trycloudflare.com';
     const APONTAMENTO_TABLE = import.meta.env.VITE_APONTAMENTO_TABLE || 'QUALIDADE.GESTAO_CARGAS_TRANSPORTE';
 
     const fazendaRef = useRef();
