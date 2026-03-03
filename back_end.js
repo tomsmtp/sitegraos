@@ -692,7 +692,7 @@ app.post('/logistica/enviar', requireModuleAccess(['SUPERVISOR', 'LOGISTICA']), 
 });
 
 // controladoria: list all processes after carregamento
-app.get('/controladoria/processos', requireModuleAccess(['CONTROLADORIA']), async (req, res) => {
+app.get('/controladoria/processos', requireModuleAccess(['CONTROLADORIA', 'SUPERVISOR']), async (req, res) => {
   let conn;
   try {
     conn = await getConnection();
