@@ -25,6 +25,13 @@ export default function Inicio({ onExit, currentUser }) {
     const tipoUsuario = currentUser?.TIPO || currentUser?.tipo || 'NÃO INFORMADO';
     const tipoHeader = String(tipoUsuario || '').trim().toUpperCase();
     const tipoAcesso = String(tipoUsuario || '').trim().toUpperCase();
+    
+    // Debug log
+    useEffect(() => {
+        console.log('DEBUG - currentUser:', currentUser);
+        console.log('DEBUG - tipoUsuario:', tipoUsuario);
+        console.log('DEBUG - tipoHeader:', tipoHeader);
+    }, [currentUser, tipoUsuario, tipoHeader]);
 
     const modulosPermitidos = useMemo(() => {
         if (tipoAcesso === 'ADMIN') {
