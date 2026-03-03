@@ -3,6 +3,7 @@ import LogisticaPage from "./logistica/logistica.jsx"
 import { useEffect, useMemo, useState, useRef } from "react";
 import Carregamento from "./carregamento/carregamento.jsx"
 import Controladoria from "./controladoria/controladoria.jsx";
+import logoInicio from '../assets/logo_inicio.png';
 
 
 export default function Inicio({ onExit, currentUser }) {
@@ -25,13 +26,6 @@ export default function Inicio({ onExit, currentUser }) {
     const tipoUsuario = currentUser?.TIPO || currentUser?.tipo || 'NÃO INFORMADO';
     const tipoHeader = String(tipoUsuario || '').trim().toUpperCase();
     const tipoAcesso = String(tipoUsuario || '').trim().toUpperCase();
-    
-    // Debug log
-    useEffect(() => {
-        console.log('DEBUG - currentUser:', currentUser);
-        console.log('DEBUG - tipoUsuario:', tipoUsuario);
-        console.log('DEBUG - tipoHeader:', tipoHeader);
-    }, [currentUser, tipoUsuario, tipoHeader]);
 
     const modulosPermitidos = useMemo(() => {
         if (tipoAcesso === 'ADMIN') {
@@ -285,7 +279,7 @@ export default function Inicio({ onExit, currentUser }) {
         <aside className="sideBar">
             <div className="headSidebar">
                 <img 
-                    src="/src/assets/logo_inicio.png"
+                    src={logoInicio}
                     className="logo"
                 />
                 
