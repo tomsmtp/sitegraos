@@ -6,6 +6,7 @@ import qrcode from '../assets/tema_3.png'
 import logoInicio from '../assets/logo_inicio.png'
 
 export default function Login() {
+    // URL fixa do backend Cloudflare Tunnel
     const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://sitegraos.trycloudflare.com';
 
     // criando referencias
