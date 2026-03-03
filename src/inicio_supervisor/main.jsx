@@ -278,7 +278,7 @@ export default function Inicio({ onExit, currentUser }) {
         <aside className="sideBar">
             <div className="headSidebar">
                 <img 
-                    src="./src/assets/logo_inicio.png"
+                    src="/src/assets/logo_inicio.png"
                     className="logo"
                 />
                 

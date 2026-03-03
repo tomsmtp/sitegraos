@@ -3,6 +3,7 @@ import "./login.css"
 import { useEffect, useRef, useState } from "react"
 import Inicio from '../inicio_supervisor/main.jsx';
 import qrcode from '../assets/tema_3.png'
+import logoInicio from '../assets/logo_inicio.png'
 
 export default function Login() {
     const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -144,7 +145,7 @@ export default function Login() {
           <form className="login-container" onSubmit={handleSubmit}>
             
             <img
-            src="src\assets\logo_inicio.png"
+            src={logoInicio}
             alt="logo_inicio"
             className="logo-inicio"
             />
