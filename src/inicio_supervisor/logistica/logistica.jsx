@@ -96,9 +96,29 @@ export default function LogisticaPage({ currentUser }) {
     };
 
     const formatFrete = (value) => {
-        const digitos = value.replace(/\D/g, "").slice(0, 6);
-        if (!digitos) return "";
-        return digitos.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        // Remove tudo exceto dígitos e virgula/ponto
+        let cleaned = value.replace(/[^0-9.,]/g, '');
+        
+        // Substitui ponto por virgula (padrão PT-BR)
+        cleaned = cleaned.replace(/\./g, ',');
+        
+        // Se tiver mais de uma virgula, remove as extras mantendo só a última
+        const parts = cleaned.split(',');
+        if (parts.length > 2) {
+            cleaned = parts[0].replace(/,/g, '') + ',' + parts[parts.length - 1];
+        }
+        
+        // Separa inteiro e decimal
+        const [inteiro = '', decimal = ''] = cleaned.split(',');
+        
+        // Formata com separador de milhar (ponto) e decimal (virgula)
+        const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        
+        if (decimal) {
+            return inteiroFormatado + ',' + decimal.slice(0, 2);
+        }
+        
+        return inteiroFormatado;
     };
 
     useEffect(() => {
